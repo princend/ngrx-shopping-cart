@@ -5,6 +5,10 @@ import { MemberRoutingModule } from './member-routing.module';
 import { ReportListComponent } from './report-list/report-list.component';
 import { ReportComponent } from './report/report.component';
 import { ShareModule } from '../share';
+import { PlatformModule } from '@angular/cdk/platform';
+import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -12,7 +16,10 @@ import { ShareModule } from '../share';
   imports: [
     CommonModule,
     MemberRoutingModule,
-    ShareModule
+    FormsModule,
+    PlatformModule,
+    MatCardModule,
+    FlexLayoutModule
   ]
 })
 export class MemberModule { }

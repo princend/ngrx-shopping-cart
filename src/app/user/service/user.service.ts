@@ -70,7 +70,10 @@ export class UserService {
   getUserFromServer(): Observable<User> {
     if (!this.utils.isTokenExpired()) {
       const token = this.utils.getToken();
-      return this.http.post(this.appConfig.apiUrl + '/users/currentUser', { token })
+
+      // tslint:disable-next-line:object-literal-shorthand
+      return this.http.post(this.appConfig.apiUrl + '/users/currentUser', { token: token },
+        { headers: { Authorization: `Bearer ${token}` } })
         .pipe(map((res: any) => {
           if (res.ok) {
             return res.payload;

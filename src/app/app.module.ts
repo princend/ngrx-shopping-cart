@@ -11,6 +11,9 @@ import { UserModule } from './user/user.module';
 import { JwtModule } from '@auth0/angular-jwt';
 import { StartupService } from './services/startup.service';
 import { UtilsService } from './services/utils.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 const JWT_CONFIG = {
   config: {
@@ -29,7 +32,10 @@ export function startupServiceFactory(startupService: StartupService): VoidFunti
     NavbarComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
     AppRoutingModule,
     FormsModule,
     ShareModule,

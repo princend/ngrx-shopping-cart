@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Report } from 'src/app/model';
 import { AppConfig } from 'src/app/share';
+import { UtilsService } from '../../services/utils.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +13,16 @@ export class ReportsService {
   reports$: BehaviorSubject<Report[]>;
   constructor(
     private appConfig: AppConfig,
-    private http: HttpClient
+    private http: HttpClient,
+    private utils: UtilsService
   ) {
     this.reports$ = new BehaviorSubject([]);
     this._getReports();
   }
   // get report from server
   getReportsFromServer(): Observable<Response> {
-    return this.http.get<Response>(this.appConfig.apiUrl + '/reports');
+    const token = this.utils.getToken();
+    return this.http.get<Response>(this.appConfig.apiUrl + '/reports', { headers: { Authorization: `Bearer ${token}` } });
   }
   _getReports(): void {
     this.getReportsFromServer()

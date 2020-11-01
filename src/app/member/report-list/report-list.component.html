@@ -1,5 +1,5 @@
 <div class="container">
-    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutWrap>
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutWrap class="flex-wrap">
         <mat-card fxFlex [ngStyle.gt-sm]="{'max-width': 'calc(25% - 20px)'}" *ngFor="let report of (reports$ | async)"
             class="card" (click)="onClick(report)">
             <mat-card-header fxLayout="row" fxLayoutAlign="start" class="card-header" fxLayoutGap="10px">
