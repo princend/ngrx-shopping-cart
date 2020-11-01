@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Report } from 'src/app/model';
 import { AppConfig } from 'src/app/share';
 import { UtilsService } from '../../services/utils.service';
@@ -43,5 +44,13 @@ export class ReportsService {
 
   getReports(): Observable<Report[]> {
     return this.reports$;
+  }
+
+  getReport(id: number): Observable<Report> {
+    return this.reports$.pipe(
+      map(reports => {
+        return reports.filter(report => report.id === id)[0];
+      })
+    );
   }
 }

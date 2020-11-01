@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
 
     this.userService.login(this.form.value).subscribe(res => {
       this.snackbar.open(res ? '登入成功' : '請檢查使用者名稱及密碼', 'OK', DURATION);
-      this.router.navigate(['/home']);
+      this.router.navigate(['/member']);
     });
   }
 
