@@ -1,0 +1,32 @@
+.container {
+    height: 400px;
+    background: url(https://content.skyscnr.com/m/7ed52a247bd675d1/original/shutterstock-730865425.jpg) no-repeat center bottom;
+    background-position: cover;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .container:before {
+      content: "";
+      display: block;
+      width: 100%;
+      background-color: rgba(0, 0, 0, .5);
+      height: 100vh;
+  }
+  
+  .login-card {
+    max-width: 350px;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);  
+  }
+  .title {
+    text-align: center;
+  }
+  
+  .btn-center {
+    display: flex;
+    justify-content: center;
+  }

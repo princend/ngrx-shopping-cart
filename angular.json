@@ -17,6 +17,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "lodash",
+              "rxjs-compat"
+           ],
             "outputPath": "dist/ngrx-shopping-cart",
             "index": "src/index.html",
             "main": "src/main.ts",

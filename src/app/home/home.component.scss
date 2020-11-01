@@ -1,0 +1,23 @@
+.bg {
+    height: 400px;
+    background: url(https://content.skyscnr.com/m/7ed52a247bd675d1/original/shutterstock-730865425.jpg) no-repeat center bottom;
+    background-position: cover;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+  }
+  .bg::before {
+      content: "";
+      display: block;
+      width: 100%;
+      background-color: rgba(0, 0, 0, .5);
+      height: 100vh;
+  }
+  .bg-title {
+      color: #fff;
+      text-align: center;
+      position: absolute;
+      width: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+  }
