@@ -19,7 +19,8 @@ const JWT_CONFIG = {
   config: {
     tokenGetter: () => localStorage.getItem('access_token')
   },
-  whitelistedDomains: ['localhost:3000']
+  // whitelistedDomains: ['localhost:3000']
+  whitelistedDomains: ['princend.herokuapp.com']
 };
 
 type VoidFuntion = () => void;

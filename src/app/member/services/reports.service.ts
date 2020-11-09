@@ -28,7 +28,7 @@ export class ReportsService {
   _getReports(): void {
     this.getReportsFromServer()
       .subscribe((res: any) => {
-        if (res.ok) {
+        if (res.success) {
           this.reports$.next(res.payload);
         } else {
           console.log('server side error');
