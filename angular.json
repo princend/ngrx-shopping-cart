@@ -20,7 +20,7 @@
             "allowedCommonJsDependencies": [
               "lodash",
               "rxjs-compat"
-           ],
+            ],
             "outputPath": "dist/ngrx-shopping-cart",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -127,6 +127,11 @@
           }
         }
       }
-    }},
-  "defaultProject": "ngrx-shopping-cart"
+    }
+  },
+  "defaultProject": "ngrx-shopping-cart",
+  "cli": {
+    "analytics": "6962487a-3007-4bce-a693-03f9d70d1c24",
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
