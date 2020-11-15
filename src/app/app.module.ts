@@ -19,7 +19,7 @@ import { UserEffects } from './store/effects/user.effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
-import { reducer } from './store/reducers/user.reducer';
+import { reducers } from './store';
 const JWT_CONFIG = {
   config: {
     tokenGetter: () => localStorage.getItem('access_token')
@@ -31,11 +31,11 @@ const JWT_CONFIG = {
 type VoidFuntion = () => void;
 export function startupServiceFactory(startupService: StartupService): VoidFuntion { return () => startupService.load(); }
 
-export function createInstrumentOptions() {
-  return {
-    maxAge: 50,
-  };
-}
+// export function createInstrumentOptions() {
+//   return {
+//     maxAge: 50,
+//   };
+// }
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,9 +53,9 @@ export function createInstrumentOptions() {
     UserModule,
     JwtModule.forRoot(JWT_CONFIG),
     EffectsModule.forRoot([UserEffects]),
-    StoreModule.forRoot(reducer),
+    StoreModule.forRoot(reducers),
     StoreRouterConnectingModule.forRoot(),
-    StoreDevtoolsModule.instrument(createInstrumentOptions())
+    StoreDevtoolsModule.instrument({ maxAge: 50 })
   ],
   providers: [UtilsService, StartupService, {
     provide: APP_INITIALIZER,
