@@ -17,8 +17,8 @@ export interface UserResponse {
 
 @Injectable()
 export class UserService {
-  loginStatus = new BehaviorSubject<boolean>(false);
-  currentUser = new BehaviorSubject<User>(null);
+  // loginStatus = new BehaviorSubject<boolean>(false);
+  // currentUser = new BehaviorSubject<User>(null);
   constructor(
     private http: HttpClient,
     private appConfig: AppConfig,

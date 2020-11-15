@@ -18,13 +18,15 @@ export class ReportsService {
     private utils: UtilsService
   ) {
     this.reports$ = new BehaviorSubject([]);
-    this._getReports();
+    // this._getReports();
   }
   // get report from server
   getReportsFromServer(): Observable<Response> {
     const token = this.utils.getToken();
     return this.http.get<Response>(this.appConfig.apiUrl + '/reports', { headers: { Authorization: `Bearer ${token}` } });
+    // return this.http.get<Response>(this.appConfig.apiUrl + '/reports');
   }
+
   _getReports(): void {
     this.getReportsFromServer()
       .subscribe((res: any) => {
@@ -46,11 +48,11 @@ export class ReportsService {
     return this.reports$;
   }
 
-  getReport(id: number): Observable<Report> {
-    return this.reports$.pipe(
-      map(reports => {
-        return reports.filter(report => report.id === id)[0];
-      })
-    );
-  }
+  // getReport(id: number): Observable<Report> {
+  //   return this.reports$.pipe(
+  //     map(reports => {
+  //       return reports.filter(report => report.id === id)[0];
+  //     })
+  //   );
+  // }
 }

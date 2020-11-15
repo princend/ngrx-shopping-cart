@@ -30,10 +30,9 @@ export class CustomeSerializer implements RouterStateSerializer<RouterStateUrl>{
     const { params } = state;
     return { url, queryParams, params };
   }
-
 }
 
-export const getRouterState = createFeatureSelector<RouterReducerState<RouterStateUrl>>('routerReducer');
+export const getRouterState = createFeatureSelector<RouterReducerState<RouterStateUrl>>('router');
 
 // export const initialState: State = {
 

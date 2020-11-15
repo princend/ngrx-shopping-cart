@@ -22,6 +22,7 @@ import { StoreModule } from '@ngrx/store';
 import { reducers } from './store';
 import { CustomeSerializer } from './store/reducers/router.reducer';
 import { RouterEffects } from './store/effects/router.effects';
+import { ReportEffects } from './store/effects/report.effects';
 const JWT_CONFIG = {
   config: {
     tokenGetter: () => localStorage.getItem('access_token')
@@ -33,11 +34,6 @@ const JWT_CONFIG = {
 type VoidFuntion = () => void;
 export function startupServiceFactory(startupService: StartupService): VoidFuntion { return () => startupService.load(); }
 
-// export function createInstrumentOptions() {
-//   return {
-//     maxAge: 50,
-//   };
-// }
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +51,7 @@ export function startupServiceFactory(startupService: StartupService): VoidFunti
     UserModule,
     JwtModule.forRoot(JWT_CONFIG),
     EffectsModule.forRoot([UserEffects]),
-    EffectsModule.forFeature([RouterEffects]),
+    EffectsModule.forFeature([RouterEffects, ReportEffects]),
     StoreModule.forRoot(reducers),
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({ maxAge: 50 })
