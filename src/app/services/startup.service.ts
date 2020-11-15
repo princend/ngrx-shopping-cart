@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
 import { getUser, logout } from '../store/actions/user.actions';
 import { selectIsLogin } from '../store/selectors/user.selectors';
 import { filter } from 'rxjs/operators';
+import { go } from '../store/actions/router.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -65,8 +66,9 @@ export class StartupService {
     if (this.utils.isTokenExpired()) {   // if token expired
       this.store.dispatch(logout());
       // this.userService.logout();
-      const router = this.injector.get(Router);
-      router.navigate(['/']);
+      this.store.dispatch(go({ payload: { path: ['/'] } }));
+      // const router = this.injector.get(Router);
+      // router.navigate(['/']);
       console.log('logout due to token expired');
     }
   }

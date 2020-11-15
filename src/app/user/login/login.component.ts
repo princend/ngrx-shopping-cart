@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from '../service/user.service';
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as fromStore from '../../store';
 import * as fromUserActions from '../../store/actions/user.actions';
 import { selectIsLogin } from 'src/app/store/selectors/user.selectors';
+import { go } from '../../store/actions/router.actions';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,9 +16,7 @@ export class LoginComponent implements OnInit {
   public form: FormGroup;
   constructor(
     private fb: FormBuilder,
-    private userService: UserService,
     private snackbar: MatSnackBar,
-    private router: Router,
     private store: Store<fromStore.AppState>
   ) { }
 
@@ -35,15 +32,14 @@ export class LoginComponent implements OnInit {
   get rememberMe(): AbstractControl { return this.form.get('rememberMe'); }
 
   login(): void {
-
-    console.log(this.form.value, 'value');
     this.store.dispatch(fromUserActions.login({ payload: this.form.value }));
+
     const DURATION = { duration: 3000 };
     this.store.select(selectIsLogin).subscribe(res => {
-      console.log('res = ', res);
       if (res) {
         this.snackbar.open('登入成功', 'OK', DURATION);
-        this.router.navigate(['/member']);
+        this.store.dispatch(go({ payload: { path: ['/member'] } }));
+        // this.router.navigate(['/member']);
       }
       else {
         this.snackbar.open('請檢察使用者名稱及密碼', 'ERROR', DURATION);

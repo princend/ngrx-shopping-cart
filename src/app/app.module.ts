@@ -16,10 +16,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './store/effects/user.effects';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './store';
+import { CustomeSerializer } from './store/reducers/router.reducer';
+import { RouterEffects } from './store/effects/router.effects';
 const JWT_CONFIG = {
   config: {
     tokenGetter: () => localStorage.getItem('access_token')
@@ -53,6 +55,7 @@ export function startupServiceFactory(startupService: StartupService): VoidFunti
     UserModule,
     JwtModule.forRoot(JWT_CONFIG),
     EffectsModule.forRoot([UserEffects]),
+    EffectsModule.forFeature([RouterEffects]),
     StoreModule.forRoot(reducers),
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({ maxAge: 50 })
@@ -62,7 +65,9 @@ export function startupServiceFactory(startupService: StartupService): VoidFunti
     useFactory: startupServiceFactory,
     deps: [StartupService, Injector],
     multi: true
-  }],
+  },
+    { provide: RouterStateSerializer, useClass: CustomeSerializer }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
