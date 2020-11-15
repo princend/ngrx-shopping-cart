@@ -55,5 +55,6 @@ export const getUserSuccess = createAction(
 );
 
 export const getUserFail = createAction(
-  '[user] getUserFail'
+  '[user] getUserFail',
+  props<{ payload: any }>()
 );
