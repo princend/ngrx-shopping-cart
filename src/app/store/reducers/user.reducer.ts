@@ -27,9 +27,6 @@ export const reducer = createReducer(
   on(fromUser.getUserSuccess, (state, action) => {
     return { ...state, currentUser: action.payload, isLogin: true };
   }),
-
-
-
   on(fromUser.login, (state) => {
     return { ...state };
   }),

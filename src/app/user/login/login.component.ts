@@ -41,9 +41,9 @@ export class LoginComponent implements OnInit {
         this.store.dispatch(go({ payload: { path: ['/member'] } }));
         // this.router.navigate(['/member']);
       }
-      else {
-        this.snackbar.open('請檢察使用者名稱及密碼', 'ERROR', DURATION);
-      }
+      // else {
+      //   this.snackbar.open('請檢察使用者名稱及密碼', '', DURATION);
+      // }
     }
     );
     // const DURATION = { duration: 3000 };
