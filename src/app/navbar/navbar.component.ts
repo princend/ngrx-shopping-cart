@@ -6,6 +6,7 @@ import { User } from '../model/user';
 import { UserService } from '../user/service/user.service';
 import { AppState } from '../store/index';
 import { selectIsLogin, selectCurrentUser } from '../store/selectors/user.selectors';
+import { logout } from '../store/actions/user.actions';
 
 @Component({
   selector: 'app-navbar',
@@ -27,7 +28,8 @@ export class NavbarComponent implements OnInit {
   }
 
   logout(): void {
-    this.userService.logout();
+    this.store.dispatch(logout());
+    // this.userService.logout();
     this.router.navigate(['/']);
   }
 
