@@ -63,6 +63,7 @@ export class UserService {
   getLoginStatus(): Observable<boolean> {
     return this.loginStatus;
   }
+
   getCurrentUser(): Observable<User> {
     return this.currentUser;
   }

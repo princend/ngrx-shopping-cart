@@ -4,6 +4,9 @@ import { UserService } from '../service/user.service';
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import * as fromStore from '../../store';
+import * as fromUserActions from '../../store/actions/user.actions';
+import { selectIsLogin } from 'src/app/store/selectors/user.selectors';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,7 +20,7 @@ export class LoginComponent implements OnInit {
     private userService: UserService,
     private snackbar: MatSnackBar,
     private router: Router,
-    private store: Store
+    private store: Store<fromStore.AppState>
   ) { }
 
   ngOnInit(): void {
@@ -33,12 +36,25 @@ export class LoginComponent implements OnInit {
 
   login(): void {
 
+    console.log(this.form.value, 'value');
+    this.store.dispatch(fromUserActions.login({ payload: this.form.value }));
     const DURATION = { duration: 3000 };
-
-    this.userService.login(this.form.value).subscribe(res => {
-      this.snackbar.open(res ? '登入成功' : '請檢查使用者名稱及密碼', 'OK', DURATION);
-      this.router.navigate(['/member']);
-    });
+    this.store.select(selectIsLogin).subscribe(res => {
+      console.log('res = ', res);
+      if (res) {
+        this.snackbar.open('登入成功', 'OK', DURATION);
+        this.router.navigate(['/member']);
+      }
+      else {
+        this.snackbar.open('請檢察使用者名稱及密碼', 'ERROR', DURATION);
+      }
+    }
+    );
+    // const DURATION = { duration: 3000 };
+    // this.userService.login(this.form.value).subscribe(res => {
+    //   this.snackbar.open(res ? '登入成功' : '請檢查使用者名稱及密碼', 'OK', DURATION);
+    //   this.router.navigate(['/member']);
+    // });
 
   }
 

@@ -21,7 +21,9 @@ export class UserEffects {
   loginEffect$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(fromUserActions.login),
-      map((action) => action.payload),
+      map((action) => {
+        return action.payload;
+      }),
       switchMap((user: User) => {
         return this.userService.loginServer(user).pipe(
           map((res: Response & LoginResponse) => {
