@@ -5,9 +5,6 @@ import { Observable } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 import { AppState } from '../store';
 import { selectIsLogin } from '../store/selectors/user.selectors';
-import { UserService } from '../user/service/user.service';
-
-
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +12,6 @@ import { UserService } from '../user/service/user.service';
 export class AuthGuard implements CanActivate, CanLoad {
   loginStatus$: Observable<boolean>;
   constructor(
-    private userService: UserService,
     private router: Router,
     private store: Store<AppState>
   ) {

@@ -12,8 +12,8 @@ import { UtilsService } from 'src/app/services';
 export class UserEffects {
 
   constructor(private actions$: Actions,
-    private userService: UserService,
-    private utils: UtilsService) { }
+              private userService: UserService,
+              private utils: UtilsService) { }
 
   loginEffect$ = createEffect(() => {
     return this.actions$.pipe(

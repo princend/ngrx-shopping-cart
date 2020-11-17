@@ -1,5 +1,5 @@
-import { act } from '@ngrx/effects';
-import { Action, createReducer, on } from '@ngrx/store';
+
+import { createReducer, on } from '@ngrx/store';
 import * as fromUser from '../actions/user.actions';
 
 export const userFeatureKey = 'user';
@@ -45,9 +45,5 @@ export const reducer = createReducer(
   on(fromUser.getUserFail, (state) => {
     return { ...state };
   }),
-
 );
 
-// export function reducer(state: State | undefined, action: Action) {
-//   return featureReducer(state, action);
-// }

@@ -18,23 +18,14 @@ export class ReportListComponent implements OnInit {
 
   reports$: Observable<Report[]>;
   constructor(
-    private reportService: ReportsService,
-    private router: Router,
     private store: Store<AppState>
   ) { }
 
   ngOnInit(): void {
-    // this.reports$ = this.reportService.getReports();
-
-    // this.reports$.subscribe(e => {
-    //   console.log(e, 'sub');
-    // });
-
     this.reports$ = this.store.select(selectReposts);
   }
 
   onClick(report: Report): void {
-    // this.router.navigate(['/member/report', report.id]);
     this.store.dispatch(go({ payload: { path: ['/member/report', report.id] } }));
   }
 }

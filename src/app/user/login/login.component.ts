@@ -6,6 +6,7 @@ import * as fromStore from '../../store';
 import * as fromUserActions from '../../store/actions/user.actions';
 import { selectIsLogin } from 'src/app/store/selectors/user.selectors';
 import { go } from '../../store/actions/router.actions';
+import { take } from 'rxjs/operators';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -35,22 +36,13 @@ export class LoginComponent implements OnInit {
     this.store.dispatch(fromUserActions.login({ payload: this.form.value }));
 
     const DURATION = { duration: 3000 };
-    this.store.select(selectIsLogin).subscribe(res => {
+    this.store.select(selectIsLogin).pipe().subscribe(res => {
       if (res) {
         this.snackbar.open('登入成功', 'OK', DURATION);
         this.store.dispatch(go({ payload: { path: ['/member'] } }));
-        // this.router.navigate(['/member']);
       }
-      // else {
-      //   this.snackbar.open('請檢察使用者名稱及密碼', '', DURATION);
-      // }
     }
     );
-    // const DURATION = { duration: 3000 };
-    // this.userService.login(this.form.value).subscribe(res => {
-    //   this.snackbar.open(res ? '登入成功' : '請檢查使用者名稱及密碼', 'OK', DURATION);
-    //   this.router.navigate(['/member']);
-    // });
 
   }
 

@@ -10,23 +10,7 @@ import { Location } from '@angular/common';
 @Injectable()
 export class RouterEffects {
 
-
-
   constructor(private actions$: Actions, private router: Router, private location: Location) { }
-
-
-  // navigate$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(go),
-  //     map((action) => action),
-  //     tap((action) => {
-  //       const payload = action.payload;
-  //       console.log('payload = ', payload);
-  //       this.router.navigate(payload.path, { ...payload.query, ...payload.extras });
-  //     })
-  //   );
-  // });
-
 
   navigate$ = createEffect(() =>
     this.actions$.pipe(
@@ -47,11 +31,9 @@ export class RouterEffects {
     { dispatch: false }
   );
 
-  navigateForward$ = createEffect(() => {
-    return this.actions$.pipe(
+  navigateForward$ = createEffect(() =>
+    this.actions$.pipe(
       ofType(back),
-      tap(() => this.location.back));
-  }, { dispatch: false });
-
-
+      tap(() => this.location.back)),
+    { dispatch: false });
 }
