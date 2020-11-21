@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 import { AppState } from '../store';
+import { go } from '../store/actions/router.actions';
 import { selectIsLogin } from '../store/selectors/user.selectors';
 
 @Injectable({
@@ -31,7 +32,7 @@ export class AuthGuard implements CanActivate, CanLoad {
     return this.loginStatus$.pipe(
       tap(status => {
         if (!status) {
-          this.router.navigate(['user/login']);
+          this.store.dispatch(go({ payload: { path: ['user/login'] } }));
         }
       }),
       take(1)
