@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import * as fromStore from '../../store';
 import * as fromUserActions from '../../store/actions/user.actions';
 import { selectIsLogin } from 'src/app/store/selectors/user.selectors';
 import { go } from '../../store/actions/router.actions';
-import { take } from 'rxjs/operators';
+import { filter, take } from 'rxjs/operators';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -36,7 +36,10 @@ export class LoginComponent implements OnInit {
     this.store.dispatch(fromUserActions.login({ payload: this.form.value }));
 
     const DURATION = { duration: 3000 };
-    this.store.select(selectIsLogin).pipe().subscribe(res => {
+    this.store.select(selectIsLogin).pipe(
+      filter(status => status)
+    ).subscribe(res => {
+      console.log(res, 'res');
       if (res) {
         this.snackbar.open('登入成功', 'OK', DURATION);
         this.store.dispatch(go({ payload: { path: ['/member'] } }));
