@@ -8,6 +8,8 @@ import { ReportsService } from '../services/reports.service';
   selector: 'app-report-list',
   templateUrl: './report-list.component.html',
   styleUrls: ['./report-list.component.scss']
+  // TODO report step48
+  // changeDection
 })
 export class ReportListComponent implements OnInit {
 
@@ -18,10 +20,14 @@ export class ReportListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // TODO report step47
+    // select selectReposts
     this.reports$ = this.reportService.getReports();
   }
 
   onClick(report: Report): void {
+    // TODO router step22
+    // dispatch go
     this.router.navigate(['/member/report', report.id]);
   }
 }

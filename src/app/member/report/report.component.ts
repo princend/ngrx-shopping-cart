@@ -8,6 +8,8 @@ import { ReportsService } from '../services/reports.service';
   selector: 'app-report',
   templateUrl: './report.component.html',
   styleUrls: ['./report.component.scss']
+  // TODO report step50
+  // changeDetection
 })
 export class ReportComponent implements OnInit {
 
@@ -18,6 +20,8 @@ export class ReportComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // TODO report step49
+    // select selectReport
     const id = this.route.snapshot.paramMap.get('rptId');
     this.report$ = this.reportService.getReport(+id);
   }

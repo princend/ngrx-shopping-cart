@@ -18,6 +18,11 @@ export class StartupService {
 
   load(): Promise<any> {
     return new Promise((resolve, reject) => {
+      // TODO user step7
+      // dispatch getUser action
+
+      // TODO user step8
+      // select selectIsLogin
       return this.userService.checkUser()
         .subscribe(res => {
           if (res) {
@@ -32,7 +37,9 @@ export class StartupService {
   }
 
   checkStatus(): void {
-    if (this.utils.isTokenExpired()) {   // if token expired
+    if (this.utils.isTokenExpired()) {
+      // TODO user step9
+      // dipatch logout action
       this.userService.logout();
       const router = this.injector.get(Router);
       router.navigate(['/']);

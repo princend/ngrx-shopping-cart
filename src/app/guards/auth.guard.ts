@@ -13,6 +13,9 @@ export class AuthGuard implements CanActivate, CanLoad {
     private userService: UserService,
     private router: Router
   ) {
+
+    // TODO user step3
+    // select selectIsLogin
     this.loginStatus$ = userService.getLoginStatus();
   }
   canActivate(
@@ -29,6 +32,8 @@ export class AuthGuard implements CanActivate, CanLoad {
     return this.loginStatus$.pipe(
       tap(status => {
         if (!status) {
+          // TODO router step21
+          // dispatch go
           this.router.navigate(['user/login']);
         }
       }),

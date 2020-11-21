@@ -34,9 +34,17 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.spinner.show();
     const DURATION = { duration: 3000 };
+    // TODO user step1
+    // 登入時dispatch login action
+
+    // TODO user step2
+    // 取得 selectIsLogin 當 isLogin ===true ,導頁至會員頁面
     this.userService.login(this.form.value).subscribe(res => {
       this.spinner.hide();
-      this.snackbar.open(res ? '登入成功' : '請檢查使用者名稱及密碼', 'OK', DURATION);
+      if (res) { this.snackbar.open('登入成功', 'OK', DURATION); }
+
+      // TODO router step20
+      // dispatch go action
       this.router.navigate(['/member']);
     });
   }

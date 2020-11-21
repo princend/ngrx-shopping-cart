@@ -31,6 +31,8 @@ export class UserService {
     return this.http.post<Response>(this.appConfig.apiUrl + '/users/authenticate', { username, password });
   }
 
+  // TODO user step10
+  // remove useless code
   login(loginData): Observable<boolean> {
     return this.loginServer(loginData).pipe(map((res) => {
       res.ok ? this.loginHanddle(loginData, res) : console.log(`can't login`);

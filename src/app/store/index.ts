@@ -6,12 +6,18 @@ import * as fromUser from './reducers/user.reducer';
 
 export interface AppState {
   [fromUser.userFeatureKey]: fromUser.UsersState;
-  // [fromRouter.routerFeatureKey]: fromRouter.RouterState;
-  // [fromReport.reportFeatureKey]: fromReport.ReportState;
+  // TODO router step18
+  // add router state
+
+  // TODO report step32
+  // add report state
 }
 
 export const reducers: ActionReducerMap<AppState> = {
   [fromUser.userFeatureKey]: fromUser.reducer,
-  // [fromRouter.routerFeatureKey]: fromRouter.reduder,
-  // [fromReport.reportFeatureKey]: fromReport.reducer
+  // TODO router step19
+  // add router reducer
+
+  // TODO report step33
+  // add report reducer
 };
