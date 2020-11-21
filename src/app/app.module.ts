@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { APP_INITIALIZER, NgModule, Injector } from '@angular/core';
+import { APP_INITIALIZER, NgModule, Injector, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +20,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreRouterConnectingModule } from '@ngrx/router-store/';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools/';
 import { reducers } from './store';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 const JWT_CONFIG = {
   config: {
@@ -47,6 +48,7 @@ export function startupServiceFactory(startupService: StartupService): VoidFunti
     FormsModule,
     ShareModule,
     UserModule,
+    NgxSpinnerModule,
     JwtModule.forRoot(JWT_CONFIG),
     EffectsModule.forRoot([UserEffects]),
     StoreModule.forRoot(reducers),
@@ -59,6 +61,7 @@ export function startupServiceFactory(startupService: StartupService): VoidFunti
     deps: [StartupService, Injector],
     multi: true
   }],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
