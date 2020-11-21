@@ -63,7 +63,10 @@ export function startupServiceFactory(startupService: StartupService): VoidFunti
     useFactory: startupServiceFactory,
     deps: [StartupService, Injector],
     multi: true
-  }],
+  },
+    // { provide: RouterStateSerializer, useClass: CustomeSerializer },
+  ],
+
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
