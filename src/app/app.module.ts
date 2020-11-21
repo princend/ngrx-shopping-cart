@@ -64,6 +64,7 @@ export function startupServiceFactory(startupService: StartupService): VoidFunti
     deps: [StartupService, Injector],
     multi: true
   },
+    // TODO router step14.5
     // { provide: RouterStateSerializer, useClass: CustomeSerializer },
   ],
 
