@@ -18,7 +18,7 @@ export class ReportsService {
     private utils: UtilsService
   ) {
     this.reports$ = new BehaviorSubject([]);
-    this._getReports();
+    // this._getReports();
   }
   // get report from server
   getReportsFromServer(): Observable<Response> {
@@ -26,32 +26,34 @@ export class ReportsService {
     return this.http.get<Response>(this.appConfig.apiUrl + '/reports', { headers: { Authorization: `Bearer ${token}` } });
   }
 
-  _getReports(): void {
-    this.getReportsFromServer()
-      .subscribe((res: any) => {
-        if (res.success) {
-          this.reports$.next(res.payload);
-        } else {
-          console.log('server side error');
-        }
-      }, (err: HttpErrorResponse) => {
-        if (err.error instanceof Error) {
-          console.log('client-side error');
-        } else {
-          console.log('server-side error');
-        }
-      });
-  }
+  // TODO report step20
+  // remove useless code
+  // _getReports(): void {
+  //   this.getReportsFromServer()
+  //     .subscribe((res: any) => {
+  //       if (res.success) {
+  //         this.reports$.next(res.payload);
+  //       } else {
+  //         console.log('server side error');
+  //       }
+  //     }, (err: HttpErrorResponse) => {
+  //       if (err.error instanceof Error) {
+  //         console.log('client-side error');
+  //       } else {
+  //         console.log('server-side error');
+  //       }
+  //     });
+  // }
 
-  getReports(): Observable<Report[]> {
-    return this.reports$;
-  }
+  // getReports(): Observable<Report[]> {
+  //   return this.reports$;
+  // }
 
-  getReport(id: number): Observable<Report> {
-    return this.reports$.pipe(
-      map(reports => {
-        return reports.filter(report => report.id === id)[0];
-      })
-    );
-  }
+  // getReport(id: number): Observable<Report> {
+  //   return this.reports$.pipe(
+  //     map(reports => {
+  //       return reports.filter(report => report.id === id)[0];
+  //     })
+  //   );
+  // }
 }

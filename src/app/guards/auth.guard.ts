@@ -1,17 +1,10 @@
 import { Injectable } from '@angular/core';
-import {
-  CanActivate,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  UrlTree,
-  CanLoad,
-  Router,
-  Route
-} from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanLoad, Router, Route } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 import { AppState } from '../store';
+import { go } from '../store/actions/router.actions';
 import { selectIsLogin } from '../store/selectors/user.selectors';
 import { UserService } from '../user/service/user.service';
 import * as fromRouteActions from '../store/actions/router.actions';

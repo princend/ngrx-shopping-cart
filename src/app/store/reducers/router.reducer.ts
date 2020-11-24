@@ -18,6 +18,7 @@ export interface RouterStateUrl {
   queryParams: Params;
 }
 
+
 export type RouterState = RouterReducerState<RouterStateUrl>;
 
 export const reducer = routerReducer;

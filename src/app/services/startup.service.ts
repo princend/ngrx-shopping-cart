@@ -24,7 +24,6 @@ export class StartupService {
 
   load(): Promise<any> {
     return new Promise((resolve, reject) => {
-
       if (!this.utils.isTokenExpired()) {
         this.store.dispatch(getUser());
         return this.store.select(selectIsLogin).pipe(
