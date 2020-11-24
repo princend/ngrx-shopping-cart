@@ -1,7 +1,7 @@
 import { ActionReducerMap } from '@ngrx/store';
 import * as fromUser from './reducers/user.reducer';
 import * as fromRouter from './reducers/router.reducer';
-// import * as fromReport from './reducers/report.reducer';
+import * as fromReport from './reducers/report.reducer';
 
 
 export interface AppState {
@@ -10,6 +10,7 @@ export interface AppState {
 
   // TODO report step9
   // add report state
+  [fromReport.reportFeatureKey]: fromReport.ReportState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
@@ -18,4 +19,5 @@ export const reducers: ActionReducerMap<AppState> = {
 
   // TODO report step10
   // add report reducer
+  [fromReport.reportFeatureKey]: fromReport.reducer,
 };

@@ -1,6 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { Report } from 'src/app/model';
 import * as fromReportAction from '../actions/report.actions';
+import { getReportAction, getReportFailAction, getReportSuccessAction } from '../actions/report.actions';
 
 export const reportFeatureKey = 'report';
 
@@ -17,11 +18,14 @@ export const reducer = createReducer(
   initialState,
   // TODO report step4
   // on getReportAction , return {...state}
+  on(getReportAction, (state) => ({ ...state })),
 
   // TODO report step5
   // on getReportSuccessAction , return { ...state, reports: action.payload }
+  on(getReportSuccessAction, (state, action) => ({ ...state, reports: action.payload })),
 
   // TODO report step6
   // on getReportFailAction , return {...state}
+  on(getReportFailAction, (state) => ({ ...state })),
 );
 
