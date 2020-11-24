@@ -18,21 +18,23 @@ export class StartupService {
 
   load(): Promise<any> {
     return new Promise((resolve, reject) => {
-      // TODO user step7
-      // dispatch getUser action
+      if (!this.utils.isTokenExpired()) {
+        // TODO user step7
+        // dispatch getUser action
 
-      // TODO user step8
-      // select selectIsLogin
-      return this.userService.checkUser()
-        .subscribe(res => {
-          if (res) {
-            interval(1000 * 60 * 5).subscribe(_ => this.checkStatus());
-          }
-          resolve(res);
-        }, err => {
-          console.log(err);
-          reject(err);
-        });
+        // TODO user step8
+        // select selectIsLogin
+        return this.userService.checkUser()
+          .subscribe(res => {
+            if (res) {
+              interval(1000 * 60 * 5).subscribe(_ => this.checkStatus());
+            }
+            resolve(res);
+          }, err => {
+            console.log(err);
+            reject(err);
+          });
+      }
     });
   }
 
