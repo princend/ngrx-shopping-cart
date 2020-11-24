@@ -17,12 +17,13 @@ import { CommonModule } from '@angular/common';
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './store/effects/user.effects';
 import { StoreModule } from '@ngrx/store';
-import { StoreRouterConnectingModule } from '@ngrx/router-store/';
+import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store/';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools/';
 import { reducers } from './store';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ReportEffects } from './store/effects/report.effects';
 import { RouterEffects } from './store/effects/router.effects';
+import { CustomeSerializer } from './store/reducers/router.reducer';
 
 const JWT_CONFIG = {
   config: {
@@ -64,8 +65,7 @@ export function startupServiceFactory(startupService: StartupService): VoidFunti
     deps: [StartupService, Injector],
     multi: true
   },
-    // TODO router step14.5
-    // { provide: RouterStateSerializer, useClass: CustomeSerializer },
+    { provide: RouterStateSerializer, useClass: CustomeSerializer },
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

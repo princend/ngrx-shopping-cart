@@ -1,19 +1,19 @@
 import { NavigationExtras } from '@angular/router';
 import { createAction, props } from '@ngrx/store';
 
-
-// TODO router step11
-// create "[router] go" Action, payload is {payload:Route}
-export const sampleAction = createAction(
-  '[source] event',
-  props<{ data: any }>()
+export const go = createAction(
+  '[router] go',
+  props<{ payload: Route }>()
 );
 
-// TODO router step12
-// create "[router] back" Action
+export const back = createAction(
+  '[Router] back',
 
-// TODO router step13
-// create "[router] forward" Action
+);
+
+export const forward = createAction(
+  '[Router] forward'
+);
 
 
 export interface Route {

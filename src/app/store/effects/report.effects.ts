@@ -17,12 +17,12 @@ export class ReportEffects {
   //     switchMap(() => {
   //       return this.reportsService.getReportsFromServer().pipe(
   //         // map((res: Response & ReportResponse) => {
-  //         // TODO report step30
+  //         // TODO report step7
   //         // if res.success return getReportSuccessAction
   //         // else return getReportFailAction
   //         // }),
 
-  //         // TODO report step31
+  //         // TODO report step8
   //         // catchError return getReportFailAction
   //       );
   //     }));

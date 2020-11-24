@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanLoad, Router, Route } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
+import { AppState } from '../store';
+import { go } from '../store/actions/router.actions';
+import { selectIsLogin } from '../store/selectors/user.selectors';
 import { UserService } from '../user/service/user.service';
 
 @Injectable({
@@ -11,12 +15,11 @@ export class AuthGuard implements CanActivate, CanLoad {
   loginStatus$: Observable<boolean>;
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    public store: Store<AppState>
   ) {
 
-    // TODO user step3
-    // select selectIsLogin
-    this.loginStatus$ = userService.getLoginStatus();
+    this.loginStatus$ = store.select(selectIsLogin);
   }
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -32,9 +35,7 @@ export class AuthGuard implements CanActivate, CanLoad {
     return this.loginStatus$.pipe(
       tap(status => {
         if (!status) {
-          // TODO router step21
-          // dispatch go
-          this.router.navigate(['user/login']);
+          this.store.dispatch(go({ payload: { path: ['user/login'] } }));
         }
       }),
       take(1)

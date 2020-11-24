@@ -26,7 +26,7 @@ export class ReportsService {
     return this.http.get<Response>(this.appConfig.apiUrl + '/reports', { headers: { Authorization: `Bearer ${token}` } });
   }
 
-  // TODO report step52
+  // TODO report step20
   // remove useless code
   _getReports(): void {
     this.getReportsFromServer()
