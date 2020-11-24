@@ -11,22 +11,6 @@ import * as fromReportActions from '../actions/report.actions';
 export class ReportEffects {
   constructor(private actions$: Actions, private reportsService: ReportsService) { }
 
-  // getReportEffect$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     // ofType(fromReportActions.getReportAction),
-  //     switchMap(() => {
-  //       return this.reportsService.getReportsFromServer().pipe(
-  //         // map((res: Response & ReportResponse) => {
-  //         // TODO report step30
-  //         // if res.success return getReportSuccessAction
-  //         // else return getReportFailAction
-  //         // }),
-
-  //         // TODO report step31
-  //         // catchError return getReportFailAction
-  //       );
-  //     }));
-  // });
 }
 
 export interface ReportResponse {

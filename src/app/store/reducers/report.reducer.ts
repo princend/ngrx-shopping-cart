@@ -15,13 +15,5 @@ export const initialState: ReportState = {
 
 export const reducer = createReducer(
   initialState,
-  // TODO report step27
-  // on getReportAction , return {...state}
-
-  // TODO report step28
-  // on getReportSuccessAction , return { ...state, reports: action.payload }
-
-  // TODO report step29
-  // on getReportFailAction , return {...state}
 );
 

@@ -6,8 +6,6 @@ import { ReportComponent } from './report/report.component';
 const routes: Routes = [
   {
     path: '',
-    // TODO report step51
-    // add canActivate,canActivateChild
     children: [
       { path: 'report-list', component: ReportListComponent },
       { path: 'report/:rptId', component: ReportComponent },

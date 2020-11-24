@@ -18,7 +18,7 @@ export const reduder = routerReducer;
 export class CustomeSerializer implements RouterStateSerializer<RouterStateUrl>{
 
   // serialize(routerState: RouterStateSnapshot): RouterStateUrl {
-  // TODO router step14
+  // TODO router step4
   // override serialize
   // }
 }

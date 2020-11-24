@@ -13,7 +13,7 @@ export class RouterEffects {
 
   navigate$ = createEffect(() =>
     this.actions$.pipe(
-      // TODO router step15
+      // TODO router step5
       // ofType
       // map
       // tap  navigate
@@ -21,9 +21,9 @@ export class RouterEffects {
     { dispatch: false }
   );
 
-  // TODO router step16
+  // TODO router step6
   // createEffect navigateBack$
 
-  // TODO router step17
+  // TODO router step7
   // createEffect navigateForward$
 }
