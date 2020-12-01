@@ -22,6 +22,7 @@ import { reducers } from './store';
 import { CustomeSerializer } from './store/reducers/router.reducer';
 import { RouterEffects } from './store/effects/router.effects';
 import { ReportEffects } from './store/effects/report.effects';
+import { NgxSpinnerModule } from 'ngx-spinner';
 const JWT_CONFIG = {
   config: {
     tokenGetter: () => localStorage.getItem('access_token')
@@ -53,7 +54,8 @@ export function startupServiceFactory(startupService: StartupService): VoidFunti
     EffectsModule.forFeature([RouterEffects, ReportEffects]),
     StoreModule.forRoot(reducers),
     StoreRouterConnectingModule.forRoot(),
-    StoreDevtoolsModule.instrument({ maxAge: 50 })
+    StoreDevtoolsModule.instrument({ maxAge: 50 }),
+    NgxSpinnerModule
   ],
   providers: [UtilsService, StartupService, {
     provide: APP_INITIALIZER,

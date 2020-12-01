@@ -7,6 +7,7 @@ import * as fromUserActions from '../../store/actions/user.actions';
 import { selectIsLogin } from 'src/app/store/selectors/user.selectors';
 import { go } from '../../store/actions/router.actions';
 import { filter, take } from 'rxjs/operators';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private snackbar: MatSnackBar,
-    private store: Store<fromStore.AppState>
+    private store: Store<fromStore.AppState>,
+    private spinner: NgxSpinnerService,
   ) { }
 
   ngOnInit(): void {
@@ -33,21 +35,21 @@ export class LoginComponent implements OnInit {
   get rememberMe(): AbstractControl { return this.form.get('rememberMe'); }
 
   login(): void {
+
     this.store.dispatch(fromUserActions.login({ payload: this.form.value }));
 
     const DURATION = { duration: 3000 };
+    this.spinner.show();
     this.store.select(selectIsLogin).pipe(
       filter(status => status)
     ).subscribe(res => {
       console.log(res, 'res');
       if (res) {
+        this.spinner.hide();
         this.snackbar.open('登入成功', 'OK', DURATION);
         this.store.dispatch(go({ payload: { path: ['/member'] } }));
       }
     }
     );
-
   }
-
-
 }
