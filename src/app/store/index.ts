@@ -4,7 +4,7 @@ import * as fromUser from './reducers/user.reducer';
 import * as fromRouter from './reducers/router.reducer';
 import * as fromReport from './reducers/report.reducer';
 export interface AppState {
-    [fromUser.userFeatureKey]: fromUser.UsersState;
+    [fromUser.userFeatureKey]: fromUser.UserState;
     [fromRouter.routerFeatureKey]: fromRouter.RouterState;
     [fromReport.reportFeatureKey]: fromReport.ReportState;
 }

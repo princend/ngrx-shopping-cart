@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanLoad, Router, Route } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { take, tap } from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 import { AppState } from '../store';
 import { go } from '../store/actions/router.actions';
-import { selectIsLogin } from '../store/selectors/user.selectors';
+import { getCurrentUser, selectCurrentUserfromEntities, selectIsLogin } from '../store/selectors/user.selectors';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,8 @@ export class AuthGuard implements CanActivate, CanLoad {
     private router: Router,
     private store: Store<AppState>
   ) {
-    this.loginStatus$ = store.select(selectIsLogin);
+    // this.loginStatus$ = store.select(selectIsLogin);
+    this.loginStatus$ = store.select(selectCurrentUserfromEntities).pipe(map(e => e.isLogin));
   }
   canActivate(
     next: ActivatedRouteSnapshot,

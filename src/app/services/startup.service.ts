@@ -3,8 +3,8 @@ import { UtilsService } from './utils.service';
 import { AppState } from '../store/index';
 import { Store } from '@ngrx/store';
 import { getUser, logout } from '../store/actions/user.actions';
-import { selectIsLogin } from '../store/selectors/user.selectors';
-import { filter } from 'rxjs/operators';
+import { selectCurrentUserfromEntities, selectIsLogin } from '../store/selectors/user.selectors';
+import { filter, map } from 'rxjs/operators';
 import { go } from '../store/actions/router.actions';
 
 @Injectable({
@@ -21,7 +21,12 @@ export class StartupService {
     return new Promise((resolve, reject) => {
       if (!this.utils.isTokenExpired()) {
         this.store.dispatch(getUser());
-        return this.store.select(selectIsLogin).pipe(
+
+        // return this.store.select(selectIsLogin).pipe(
+        //   filter(status => status)
+        // ).
+        return this.store.select(selectCurrentUserfromEntities).pipe(
+          map(e => e.isLogin),
           filter(status => status)
         ).
           subscribe(res => {

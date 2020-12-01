@@ -1,5 +1,7 @@
+import { Update } from '@ngrx/entity';
 import { createAction, props } from '@ngrx/store';
 import { User } from '../../model/user';
+import { UserForEntity } from '../reducers/user.reducer';
 
 export const login = createAction(
   '[user] login',
@@ -42,3 +44,7 @@ export const getUserFail = createAction(
   '[user] getUserFail',
   props<{ payload: any }>()
 );
+
+
+export const setUser  = createAction('[User/API] Set User', props<{ user: UserForEntity }>());
+export const updateUser = createAction('[User/API] Update User', props<{ update: Update<UserForEntity> }>());

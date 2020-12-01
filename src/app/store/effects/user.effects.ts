@@ -7,13 +7,15 @@ import * as fromUserActions from '../actions/user.actions';
 import { User } from '../../model/user';
 import { of } from 'rxjs';
 import { UtilsService } from 'src/app/services';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class UserEffects {
 
   constructor(private actions$: Actions,
-              private userService: UserService,
-              private utils: UtilsService) { }
+    private userService: UserService,
+    private utils: UtilsService,
+    private store: Store) { }
 
   loginEffect$ = createEffect(() => {
     return this.actions$.pipe(
@@ -28,7 +30,24 @@ export class UserEffects {
               if (user.rememberMe) {
                 this.utils.writeToken(res.payload);
               }
-              return fromUserActions.loginSuccess({ payload: user.username });
+
+
+              // this.store.dispatch(fromUserActions.updateUser({
+              //   update: {
+              //     id: 'user',
+              //     changes: { isLogin: true, currentUser: user.username }
+              //   }
+              // }));
+
+
+              return fromUserActions.updateUser({
+                update: {
+                  id: 'user',
+                  changes: { isLogin: true, currentUser: user.username }
+                }
+              });
+
+              // return fromUserActions.loginSuccess({ payload: user.username });
             } else {
               return fromUserActions.loginFail({ payload: res.payload });
             }

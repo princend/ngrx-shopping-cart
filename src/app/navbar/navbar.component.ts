@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from '../store/index';
-import { selectIsLogin, selectCurrentUser } from '../store/selectors/user.selectors';
+import { selectIsLogin, selectCurrentUser, selectCurrentUserfromEntities } from '../store/selectors/user.selectors';
 import { logout } from '../store/actions/user.actions';
 import { go } from '../store/actions/router.actions';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -18,8 +19,10 @@ export class NavbarComponent implements OnInit {
   constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
-    this.login$ = this.store.select(selectIsLogin);
-    this.user$ = this.store.select(selectCurrentUser);
+    // this.login$ = this.store.select(selectIsLogin);
+    this.login$ = this.store.select(selectCurrentUserfromEntities).pipe(map(e => e.isLogin));
+    // this.user$ = this.store.select(selectCurrentUser);
+    this.user$ = this.store.select(selectCurrentUserfromEntities).pipe(map(e => e.currentUser));
   }
 
   logout(): void {
