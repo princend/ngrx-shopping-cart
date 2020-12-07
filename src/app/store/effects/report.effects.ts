@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
-import { getReportAction, getReportFailAction, getReportSuccessAction } from '../actions/report.actions';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { getReportAction, getReportFailAction } from '../actions/report.actions';
 import { ReportsService } from '../../member/services/reports.service';
 import { of } from 'rxjs';
 import { Report } from 'src/app/model';
@@ -18,7 +18,7 @@ export class ReportEffects {
         return this.reportsService.getReportsFromServer().pipe(
           map((res: Response & ReportResponse) => {
             if (res.success) {
-              return getReportSuccessAction({ payload: res.payload });
+              return fromReportActions.addReports({ reports: res.payload });
             }
             else {
               return getReportFailAction({ payload: res.payload });
@@ -29,7 +29,6 @@ export class ReportEffects {
       }));
   });
 }
-
 
 export interface ReportResponse {
   success: boolean;

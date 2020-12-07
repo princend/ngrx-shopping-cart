@@ -4,43 +4,22 @@ import { Report } from 'src/app/model';
 import * as fromReportAction from '../actions/report.actions';
 
 export const reportFeatureKey = 'report';
-
-export interface ReportState {
-  reports: Report[];
+export interface ReportState extends EntityState<Report> {
 }
 
-export const initialState: ReportState = {
-  reports: []
-};
-
-
-export interface ReportStateEntity extends EntityState<ReportState> {
-  selectedUserId: string | null;
-}
-
-
-export const adapter: EntityAdapter<ReportState> = createEntityAdapter<ReportState>({ selectId: a => 'reports' });
-
-
-const defaultUser = {
-  ids: [],
-  entities: {
-    user: { ...initialState }
-  }
-};
-
-export const initialStateWithAdapter: ReportStateEntity = adapter.getInitialState({ ...defaultUser, selectedUserId: 'reports' });
-
-
-
-
-
+export const adapter: EntityAdapter<Report> = createEntityAdapter<Report>({ selectId: (user: Report) => user.id });
+export const initialStateWithAdapter: ReportState = adapter.getInitialState();
 
 export const reducer = createReducer(
-  initialState,
+  initialStateWithAdapter,
   on(fromReportAction.getReportAction, (state) => ({ ...state })),
-  on(fromReportAction.getReportSuccessAction, (state, action) => ({ ...state, reports: action.payload })),
   on(fromReportAction.getReportFailAction, (state) => ({ ...state })),
-  on(fromReportAction.resetPeportAction, (state) => ({ ...initialState })),
+  on(fromReportAction.resetPeportAction, (state) => ({ ...state })),
+  on(fromReportAction.addReports, (state, { reports }) => {
+    return adapter.addMany(reports, state);
+  }),
 );
 
+export const selectIds = adapter.getSelectors().selectIds;
+export const selectEntities = adapter.getSelectors().selectEntities;
+export const selectReportAll = adapter.getSelectors().selectAll;

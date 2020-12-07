@@ -1,19 +1,14 @@
-import { createSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { getRouterState } from '../reducers/router.reducer';
-import { AppState } from '../index';
-import { ReportState } from '../reducers/report.reducer';
+import { reportFeatureKey } from '../reducers/report.reducer';
 import { Report } from 'src/app/model';
+import * as fromReducer from '../reducers/report.reducer';
 
-export const getReportState = (state: AppState) => state.report;
-
-export const selectReposts = createSelector(
-    getReportState,
-    (state: ReportState) => state.reports
-);
-
+export const selectReportState = createFeatureSelector<fromReducer.ReportState>(reportFeatureKey);
+export const selectReposts = createSelector(selectReportState, fromReducer.selectReportAll);
 export const selectReport = createSelector(
-    getRouterState, getReportState,
-    (router, reportState): Report => {
-        return router.state && reportState.reports.filter(report => report.id === +router.state.params.rptId)[0];
-    }
+  getRouterState, selectReposts,
+  (router, reposts): Report => {
+    return router.state && reposts.filter(report => report.id === +router.state.params.rptId)[0];
+  }
 );

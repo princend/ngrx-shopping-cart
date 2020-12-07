@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import * as fromStore from '../../store';
 import * as fromUserActions from '../../store/actions/user.actions';
-import { selectCurrentUserfromEntities, selectIsLogin, selectUserEntities, selectUserIds } from 'src/app/store/selectors/user.selectors';
+import { selectCurrentUserfromEntities, selectUserEntities, selectUserIds } from 'src/app/store/selectors/user.selectors';
 import { go } from '../../store/actions/router.actions';
 import { filter, take } from 'rxjs/operators';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -40,28 +40,6 @@ export class LoginComponent implements OnInit {
 
     const DURATION = { duration: 3000 };
     this.spinner.show();
-    // this.store.select(selectIsLogin).pipe(
-    //   filter(status => status)
-    // ).subscribe(res => {
-    //   console.log(res, 'res');
-    //   if (res) {
-    //     this.spinner.hide();
-    //     this.snackbar.open('登入成功', 'OK', DURATION);
-    //     this.store.dispatch(go({ payload: { path: ['/member'] } }));
-    //   }
-    // }
-    // );
-
-
-    this.store.select(selectUserIds).subscribe(e => {
-      console.log('adpater的ids', e);
-    });
-
-
-    this.store.select(selectUserEntities).pipe(filter(e => e.user.isLogin)).subscribe(e => {
-      console.log('adpater的entities', e);
-    });
-
     this.store.select(selectCurrentUserfromEntities).pipe(filter(e => e.isLogin)).subscribe(e => {
       if (e.isLogin) {
         this.spinner.hide();

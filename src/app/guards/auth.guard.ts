@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { AppState } from '../store';
 import { go } from '../store/actions/router.actions';
-import { getCurrentUser, selectCurrentUserfromEntities, selectIsLogin } from '../store/selectors/user.selectors';
+import { selectCurrentUserfromEntities } from '../store/selectors/user.selectors';
 
 @Injectable({
   providedIn: 'root'

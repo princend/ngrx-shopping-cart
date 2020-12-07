@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Report } from 'src/app/model';
-import { ReportsService } from '../services/reports.service';
 import { AppState } from '../../store/index';
 import { Store } from '@ngrx/store';
 import { selectReposts } from '../../store/selectors/report.selectors';

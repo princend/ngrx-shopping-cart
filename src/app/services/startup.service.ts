@@ -3,7 +3,7 @@ import { UtilsService } from './utils.service';
 import { AppState } from '../store/index';
 import { Store } from '@ngrx/store';
 import { getUser, logout } from '../store/actions/user.actions';
-import { selectCurrentUserfromEntities, selectIsLogin } from '../store/selectors/user.selectors';
+import { selectCurrentUserfromEntities } from '../store/selectors/user.selectors';
 import { filter, map } from 'rxjs/operators';
 import { go } from '../store/actions/router.actions';
 

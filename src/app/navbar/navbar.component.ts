@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from '../store/index';
-import { selectIsLogin, selectCurrentUser, selectCurrentUserfromEntities } from '../store/selectors/user.selectors';
+import { selectCurrentUserfromEntities } from '../store/selectors/user.selectors';
 import { logout } from '../store/actions/user.actions';
 import { go } from '../store/actions/router.actions';
 import { map } from 'rxjs/operators';
