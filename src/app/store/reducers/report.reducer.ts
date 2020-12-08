@@ -18,6 +18,13 @@ export const reducer = createReducer(
   on(fromReportAction.addReports, (state, { reports }) => {
     return adapter.addMany(reports, state);
   }),
+
+  on(fromReportAction.addReport, (state, { report }) => {
+    return adapter.addOne(report, state)
+  }),
+  on(fromReportAction.deleteReport, (state, { id }) => {
+    return adapter.removeOne(id, state);
+  }),
 );
 
 export const selectIds = adapter.getSelectors().selectIds;

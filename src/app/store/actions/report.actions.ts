@@ -20,5 +20,8 @@ export const resetPeportAction = createAction(
   '[Report] resetReport'
 );
 
+export const addReport = createAction('[Report] addReport', props<{ report: Report }>());
+export const deleteReport = createAction('[Report] deleteReport', props<{ id: string }>());
+
 
 export const addReports = createAction('[User/API] Add reports', props<{ reports: Report[] }>());
