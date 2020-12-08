@@ -7,7 +7,15 @@ export const reportFeatureKey = 'report';
 export interface ReportState extends EntityState<Report> {
 }
 
-export const adapter: EntityAdapter<Report> = createEntityAdapter<Report>({ selectId: (user: Report) => user.id });
+export function sortByTitle(a: Report, b: Report): number {
+  return a.title.localeCompare(b.title);
+}
+
+export const adapter: EntityAdapter<Report> = createEntityAdapter<Report>({
+  selectId: (report: Report) => report.id,
+  sortComparer: sortByTitle
+});
+
 export const initialStateWithAdapter: ReportState = adapter.getInitialState();
 
 export const reducer = createReducer(
@@ -20,7 +28,7 @@ export const reducer = createReducer(
   }),
 
   on(fromReportAction.addReport, (state, { report }) => {
-    return adapter.addOne(report, state)
+    return adapter.addOne(report, state);
   }),
   on(fromReportAction.deleteReport, (state, { id }) => {
     return adapter.removeOne(id, state);
