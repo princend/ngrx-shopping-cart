@@ -43,4 +43,10 @@ export class ReportDataService extends DefaultDataService<Report> {
     const urlPath = this.httpUrlGenerator.entityResource('Report', '') + `/removeReport?id=${key}`;
     return this.http.delete(urlPath, this.httpOptions).pipe(map(e => e['payload'])) as any;
   }
+
+  removeAll(): Observable<any> {
+
+    const urlPath = this.httpUrlGenerator.entityResource('Report', '') + `/removeAll`;
+    return this.http.delete(urlPath, this.httpOptions).pipe(map(e => e['payload'])) as any;
+  }
 }

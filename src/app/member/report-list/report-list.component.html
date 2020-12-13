@@ -2,6 +2,7 @@
     <input matInput placeholder="reportID" required [(ngModel)]="reportID">
     <button mat-raised-button (click)="add()">新增</button>
     <button mat-raised-button (click)="delete()">刪除</button>
+    <div> <button mat-raised-button (click)="removeAll()">刪除全部</button> </div>
     <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutWrap class="flex-wrap">
         <mat-card fxFlex [ngStyle.gt-sm]="{'max-width': 'calc(25% - 20px)'}" *ngFor="let report of (reports$ | async)"
             class="card" (click)="onClick(report)">

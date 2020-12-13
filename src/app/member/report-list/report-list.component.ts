@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { go } from '../../store/actions/router.actions';
 import * as fromReport from '../../store/actions/report.actions'
 import { ReportEntityService } from 'src/app/services/report-entity.service';
+import { tap } from 'rxjs/operators';
 @Component({
   selector: 'app-report-list',
   templateUrl: './report-list.component.html',
@@ -21,10 +22,12 @@ export class ReportListComponent implements OnInit {
     private reportEntityService: ReportEntityService
   ) {
     this.reports$ = this.reportEntityService.entities$;
+
   }
 
   ngOnInit(): void {
     this.getReports();
+    // this.deleteAll();
   }
 
   onClick(report: Report): void {
@@ -45,4 +48,8 @@ export class ReportListComponent implements OnInit {
     this.reportEntityService.getAll();
   }
 
+
+  removeAll() {
+    this.reportEntityService.removeAll().subscribe();
+  }
 }
