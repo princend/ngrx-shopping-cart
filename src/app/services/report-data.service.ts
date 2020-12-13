@@ -9,19 +9,32 @@ import { UtilsService } from './utils.service';
 
 @Injectable({ providedIn: 'root' })
 export class ReportDataService extends DefaultDataService<Report> {
+  token
+  httpOptions
   constructor(http: HttpClient, httpUrl: HttpUrlGenerator, private utils: UtilsService) {
     super('Report', http, httpUrl);
-  }
-  getAll(): Observable<Report[]> {
-    const token = this.utils.getToken()
-    const httpOptions = {
+    this.token = this.utils.getToken()
+    this.httpOptions = {
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${this.token}`
       }
     };
+  }
+  getAll(): Observable<Report[]> {
+    // const token = this.utils.getToken()
+    // const httpOptions = {
+    //   headers: {
+    //     Authorization: `Bearer ${token}`
+    //   }
+    // };
     const urlPath = this.httpUrlGenerator.collectionResource('Report', '');
-    return this.http.get(urlPath, httpOptions).pipe(
-      map(e=>e['payload'])
+    return this.http.get(urlPath, this.httpOptions).pipe(
+      map(e => e['payload'])
     ) as any;
+  }
+
+  add(request: Report): Observable<Report> {
+    const urlPath = this.httpUrlGenerator.entityResource('Report', '')+'/addReport';
+    return this.http.post(urlPath, request, this.httpOptions).pipe(map(e => e['payload'])) as any;
   }
 }
