@@ -25,6 +25,7 @@ import { ReportEffects } from './store/effects/report.effects';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { DefaultDataServiceConfig, EntityDataModule } from '@ngrx/data';
 import { entityConfig } from './entity-metadata';
+import { EntityStoreModule } from './store/entity-store.module';
 const JWT_CONFIG = {
   config: {
     tokenGetter: () => localStorage.getItem('access_token')
@@ -69,7 +70,8 @@ export function startupServiceFactory(startupService: StartupService): VoidFunti
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({ maxAge: 50 }),
     NgxSpinnerModule,
-    EntityDataModule.forRoot(entityConfig)
+    EntityDataModule.forRoot(entityConfig),
+    EntityStoreModule
   ],
   providers: [UtilsService, StartupService, {
     provide: APP_INITIALIZER,

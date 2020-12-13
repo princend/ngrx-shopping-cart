@@ -11,23 +11,6 @@ import * as fromReportActions from '../actions/report.actions';
 @Injectable()
 export class ReportEffects {
   constructor(private actions$: Actions, private reportsService: ReportsService) { }
-  getReportEffect$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(fromReportActions.getReportAction),
-      switchMap(() => {
-        return this.reportsService.getReportsFromServer().pipe(
-          map((res: Response & ReportResponse) => {
-            if (res.success) {
-              return fromReportActions.addReports({ reports: res.payload });
-            }
-            else {
-              return getReportFailAction({ payload: res.payload });
-            }
-          }),
-          catchError(err => of(getReportFailAction({ payload: err })))
-        );
-      }));
-  });
 }
 
 export interface ReportResponse {

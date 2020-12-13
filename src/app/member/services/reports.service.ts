@@ -16,10 +16,5 @@ export class ReportsService {
     private utils: UtilsService
   ) { }
 
-  // get report from server
-  getReportsFromServer(): Observable<Response> {
-    const token = this.utils.getToken();
-    return this.http.get<Response>(this.appConfig.apiUrl + '/reports', { headers: { Authorization: `Bearer ${token}` } });
-  }
 
 }
