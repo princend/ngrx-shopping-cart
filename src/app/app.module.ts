@@ -30,15 +30,18 @@ const JWT_CONFIG = {
     tokenGetter: () => localStorage.getItem('access_token')
   },
   // whitelistedDomains: ['localhost:3000']
-  whitelistedDomains: ['princend.herokuapp.com']
+  whitelistedDomains: ['princend.herokuapp.com','localhost:3000']
 };
 
 const defaultDataServiceConfig: DefaultDataServiceConfig = {
-  root: 'https://princend.herokuapp.com/api',
+  // root: 'https://princend.herokuapp.com/api',
+  root: 'http://localhost:3000/api',
   entityHttpResourceUrls:{
     Report:{
-      entityResourceUrl: `reports`,
-      collectionResourceUrl:`https://princend.herokuapp.com/api/reports`
+      // entityResourceUrl: `reports`,
+      entityResourceUrl: `http://localhost:3000/api/reports`,
+      // collectionResourceUrl:`https://princend.herokuapp.com/api/reports`
+      collectionResourceUrl:`http://localhost:3000/api/reports`
     }
   },
   timeout: 3000, // request timeout
