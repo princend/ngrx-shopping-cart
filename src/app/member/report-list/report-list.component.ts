@@ -33,12 +33,11 @@ export class ReportListComponent implements OnInit {
 
   add() {
     const report: Report = { id: this.reportID, master: 'a', image: 'https://picsum.photos/300/150', title: `this is ${this.reportID}`, report: '測試測試測試' }
-    // this.store.dispatch(fromReport.addReport({ report: report }))
     this.reportEntityService.add(report)
   }
 
   delete() {
-    this.store.dispatch(fromReport.deleteReport({ id: this.reportID }))
+    this.reportEntityService.delete(this.reportID);
   }
 
 

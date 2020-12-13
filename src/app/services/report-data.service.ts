@@ -34,7 +34,13 @@ export class ReportDataService extends DefaultDataService<Report> {
   }
 
   add(request: Report): Observable<Report> {
-    const urlPath = this.httpUrlGenerator.entityResource('Report', '')+'/addReport';
+    const urlPath = this.httpUrlGenerator.entityResource('Report', '') + '/addReport';
     return this.http.post(urlPath, request, this.httpOptions).pipe(map(e => e['payload'])) as any;
+  }
+
+
+  delete(key: string): Observable<number> {
+    const urlPath = this.httpUrlGenerator.entityResource('Report', '') + `/removeReport?id=${key}`;
+    return this.http.delete(urlPath, this.httpOptions).pipe(map(e => e['payload'])) as any;
   }
 }
