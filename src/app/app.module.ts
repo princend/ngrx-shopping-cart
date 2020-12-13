@@ -23,6 +23,8 @@ import { CustomeSerializer } from './store/reducers/router.reducer';
 import { RouterEffects } from './store/effects/router.effects';
 import { ReportEffects } from './store/effects/report.effects';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { EntityDataModule } from '@ngrx/data';
+import { entityConfig } from './entity-metadata';
 const JWT_CONFIG = {
   config: {
     tokenGetter: () => localStorage.getItem('access_token')
@@ -55,7 +57,8 @@ export function startupServiceFactory(startupService: StartupService): VoidFunti
     StoreModule.forRoot(reducers),
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({ maxAge: 50 }),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    EntityDataModule.forRoot(entityConfig)
   ],
   providers: [UtilsService, StartupService, {
     provide: APP_INITIALIZER,
