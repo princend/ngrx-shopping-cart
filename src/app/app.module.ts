@@ -23,7 +23,7 @@ import { CustomeSerializer } from './store/reducers/router.reducer';
 import { RouterEffects } from './store/effects/router.effects';
 import { ReportEffects } from './store/effects/report.effects';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { EntityDataModule } from '@ngrx/data';
+import { DefaultDataServiceConfig, EntityDataModule } from '@ngrx/data';
 import { entityConfig } from './entity-metadata';
 const JWT_CONFIG = {
   config: {
@@ -32,6 +32,17 @@ const JWT_CONFIG = {
   // whitelistedDomains: ['localhost:3000']
   whitelistedDomains: ['princend.herokuapp.com']
 };
+
+const defaultDataServiceConfig: DefaultDataServiceConfig = {
+  root: 'https://princend.herokuapp.com/api',
+  entityHttpResourceUrls:{
+    Report:{
+      entityResourceUrl: `reports`,
+      collectionResourceUrl:`https://princend.herokuapp.com/api/reports`
+    }
+  },
+  timeout: 3000, // request timeout
+}
 
 type VoidFuntion = () => void;
 export function startupServiceFactory(startupService: StartupService): VoidFuntion { return () => startupService.load(); }
@@ -66,7 +77,8 @@ export function startupServiceFactory(startupService: StartupService): VoidFunti
     deps: [StartupService, Injector],
     multi: true
   },
-    { provide: RouterStateSerializer, useClass: CustomeSerializer }
+    { provide: RouterStateSerializer, useClass: CustomeSerializer },
+    { provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig }
   ],
   bootstrap: [AppComponent]
 })
