@@ -7,6 +7,7 @@ import { go } from '../../store/actions/router.actions';
 import * as fromReport from '../../store/actions/report.actions'
 import { ReportEntityService } from 'src/app/services/report-entity.service';
 import { tap } from 'rxjs/operators';
+import { removeAllAction } from 'src/app/store/actions/entity.actions';
 @Component({
   selector: 'app-report-list',
   templateUrl: './report-list.component.html',
@@ -50,6 +51,9 @@ export class ReportListComponent implements OnInit {
 
 
   removeAll() {
-    this.reportEntityService.removeAll().subscribe();
+    // 方法一
+    // this.reportEntityService.removeAll().subscribe();
+    // 方法二
+    this.store.dispatch(removeAllAction);
   }
 }
