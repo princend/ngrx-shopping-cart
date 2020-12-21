@@ -13,5 +13,14 @@ export const removeAllAction = new EntityActionFactory().create<Report>(
   'Report',
   EntityOp.REMOVE_ALL,
   null,
-  {mergeStrategy:MergeStrategy.PreserveChanges,isOptimistic:true}
-)
+  { mergeStrategy: MergeStrategy.PreserveChanges, isOptimistic: true }
+);
+
+
+export const undoManyAction = new EntityActionFactory().create<Report>(
+  'Report',
+  EntityOp.UNDO_MANY,
+  null,
+  { mergeStrategy: MergeStrategy.PreserveChanges, isOptimistic: true }
+);
+
