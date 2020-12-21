@@ -8,7 +8,7 @@ import * as fromReport from '../../store/actions/report.actions'
 import { ReportEntityService } from 'src/app/services/report-entity.service';
 import { tap, take } from 'rxjs/operators';
 import { removeAllAction } from 'src/app/store/actions/entity.actions';
-import { EntityOp } from '@ngrx/data';
+import { EntityOp, MergeStrategy } from '@ngrx/data';
 @Component({
   selector: 'app-report-list',
   templateUrl: './report-list.component.html',
@@ -41,11 +41,12 @@ export class ReportListComponent implements OnInit {
       id: this.reportID,
       master: 'a', image: 'https://picsum.photos/300/150', title: `this is ${this.reportID}`, report: '測試測試測試'
     };
-    this.reportEntityService.add(report);
+    this.reportEntityService.add(report, { isOptimistic: true, mergeStrategy: MergeStrategy.PreserveChanges });
   }
 
   delete(): void {
-    this.reportEntityService.delete(this.reportID, { isOptimistic: true });
+
+    this.reportEntityService.delete(this.reportID, { isOptimistic: true, mergeStrategy: MergeStrategy.PreserveChanges });
   }
 
 
