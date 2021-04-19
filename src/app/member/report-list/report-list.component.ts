@@ -22,7 +22,8 @@ export class ReportListComponent implements OnInit {
   }
 
 
-  // test222
+  // test1
+  // test2222
   onClick(report: Report): void {
     this.router.navigate(['/member/report', report.id]);
   }
