@@ -27,13 +27,11 @@ jobs:
 
       # === 1. 根據 commit 做變數處理 ===
       - name: Set Variable from Commit
-        env:
-          branch: ${{ github.ref }}
         run: |
-          echo "123 ~ github.ref: ${{github.ref}}"
-          if ${branch} == 'refs/heads/next'; then
+          echo "123 ~ github.ref: ${{github.ref}}";
+          if ${{ github.ref }} == 'refs/heads/next'; then
             echo "github.ref: ${{github.ref}}"
-          else if ${branch} =='refs/heads/lastest'
+          else if ${{ github.ref }} =='refs/heads/lastest'
              echo "latest ~ github.ref: ${{github.ref}} "
           fi
       # ==============================
