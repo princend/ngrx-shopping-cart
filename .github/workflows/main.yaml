@@ -31,6 +31,7 @@ jobs:
         env:
           branch: ${{ github.ref }}
         run: |
+          echo "123 ~ github.ref: ${{github.ref}}"
           if ${branch} == 'refs/heads/next'; then
             echo "github.ref: ${{github.ref}}"
           else if ${branch} =='refs/heads/lastest'
