@@ -33,5 +33,4 @@ jobs:
             echo "github.ref: ${{github.ref}}"
           else if ${{ github.ref }} =='refs/heads/lastest'
              echo "latest ~ github.ref: ${{github.ref}} "
-          fi
       # ==============================
