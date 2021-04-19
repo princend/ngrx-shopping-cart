@@ -21,7 +21,10 @@ export class ReportListComponent implements OnInit {
     this.reports$ = this.reportService.getReports();
   }
 
+
+  // test1
   onClick(report: Report): void {
     this.router.navigate(['/member/report', report.id]);
   }
+
 }
